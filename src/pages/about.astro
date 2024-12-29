@@ -1,20 +1,70 @@
 ---
+const pageTitle = 'About Me';
 
+const identity = {
+  firstName: 'Newman',
+  country: 'USA',
+  occupation: 'Web Monkey',
+  hobbies: ['Cooking', 'birdwatching', 'Indoor Gardening'],
+};
+
+const skills = ['HTML', 'CSS', 'JavaScript', 'Listening', 'Astro', 'Curiosity'];
+
+const happy = true;
+const finished = false;
+const goal = 3;
+
+const skillColor = 'green';
+const fontWeight = 'italic';
+const textCase = 'uppercase';
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>About</title>
-	</head>
-	<body>
-		<a href="/">Home</a>
-		<a href="/about/">About</a>
-		<a href="/blog/">Blog</a>
-		<h1>The About site</h1>
-		<div class="p font">I'm skipping the Vercel stuff. Not sure why.  I'd like to get to the data layer stuff on Astro first</div>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+	<style define:vars={{ skillColor , fontWeight , textCase }}>
+		h1 {
+		  color: purple;
+		  font-size: 4rem;
+		}
+		.skill {
+			font-weight: var(--fontWeight);
+			color: var(--skillColor);
+    		text-transform: var(--textCase);
+		}
+	  </style>
+  </head>
+  <body>
+    <a href="/">Home</a>
+    <a href="/about/">About</a>
+    <a href="/posts/">Blog</a>
+
+    <h1>The {pageTitle} page</h1>
+    <div class="p font">
+      <p>
+        My name is {identity.firstName} and I am a {identity.occupation} from the
+        {identity.country}.
+      </p>
+      <p>My hobbies include: {identity.hobbies.join(', ')}</p>
+	  <ul>
+      <p>My skills include: {skills.map((skill) => <li class="skill">{skill}</li>)}</p>
+	</ul>
+
+      {happy && <p>I am happy to be learning Astro!</p>}
+
+      {finished && <p>I finished this tutorial!</p>}
+
+      {
+        (goal === 3) ? (
+          <p>My goal is to finish in 3 days.</p>
+        ) : (
+          <p>My goal is not 3 days.</p>
+        )
+      }
+    </div>
+  </body>
 </html>
